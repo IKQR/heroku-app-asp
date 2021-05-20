@@ -10,7 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deploy", "deploy", "{4C5E2553-3D64-4A92-9DAC-C15934CDC7F4}"
 	ProjectSection(SolutionItems) = preProject
 		Dockerfile.txt = Dockerfile.txt
-		.github\workflow\main.yml = .github\workflow\main.yml
+		.github\workflows\main.yml = .github\workflows\main.yml
 	EndProjectSection
 EndProject
 Global
