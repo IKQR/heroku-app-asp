@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31019.35
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{E6F1CC01-9F52-47FB-A36C-395C14C67ECD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HerokuApplication.Web", "src\HerokuApplication.Web\HerokuApplication.Web.csproj", "{2D3FBD97-09C8-4770-B70C-047640D483D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HerokuApplication.Web", "src\HerokuApplication.Web\HerokuApplication.Web.csproj", "{2D3FBD97-09C8-4770-B70C-047640D483D8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deploy", "deploy", "{4C5E2553-3D64-4A92-9DAC-C15934CDC7F4}"
 	ProjectSection(SolutionItems) = preProject
@@ -15,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deploy", "deploy", "{4C5E25
 		Dockerfile = Dockerfile
 		.github\workflows\main.yml = .github\workflows\main.yml
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HerokuApplication.Dal", "HerokuApplication.Dal\HerokuApplication.Dal.csproj", "{97BE94E0-191B-4873-BF2A-21787C4181DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,12 +28,17 @@ Global
 		{2D3FBD97-09C8-4770-B70C-047640D483D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D3FBD97-09C8-4770-B70C-047640D483D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D3FBD97-09C8-4770-B70C-047640D483D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97BE94E0-191B-4873-BF2A-21787C4181DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97BE94E0-191B-4873-BF2A-21787C4181DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97BE94E0-191B-4873-BF2A-21787C4181DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97BE94E0-191B-4873-BF2A-21787C4181DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{2D3FBD97-09C8-4770-B70C-047640D483D8} = {E6F1CC01-9F52-47FB-A36C-395C14C67ECD}
+		{97BE94E0-191B-4873-BF2A-21787C4181DD} = {E6F1CC01-9F52-47FB-A36C-395C14C67ECD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7F905DE7-CE5E-44C6-82A4-4F82675F3469}

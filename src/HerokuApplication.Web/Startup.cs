@@ -10,6 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HerokuApplication.Dal;
+using Microsoft.EntityFrameworkCore;
 
 namespace HerokuApplication.Web
 {
@@ -26,6 +28,9 @@ namespace HerokuApplication.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddDbContext<NeuralDbContext>(options =>
+                options.UseNpgsql(Configuration.GetConnectionString("Default")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
