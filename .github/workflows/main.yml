@@ -16,3 +16,7 @@ jobs:
           heroku_app_name: "ikqr-asp-application" #Must be unique in Heroku
           heroku_email: "kusikillya2001@gmail.com"
           usedocker: true
+          docker_build_args: |
+            ConnectionStrings__Default
+        env:
+          ConnectionStrings__Default: "Host=sql11.freesqldatabase.com;Database=sql11413514;User=sql11413514;Password=2nuNQTbI1r;Port=3306"
