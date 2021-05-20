@@ -20,7 +20,7 @@ WORKDIR /app/
 
 COPY --from=build-env /out .
 
-ENV ConnectionStrings__Default=$ConnectionStrings__Default
+#ENV ConnectionStrings__Default=$ConnectionStrings__Default
 #ENV ConnectionStrings__Default="Host=sql11.freesqldatabase.com;Database=sql11413514;User=sql11413514;Password=2nuNQTbI1r;Port=3306"
 
 CMD exec ./HerokuApplication.Web --urls http://+:$PORT
