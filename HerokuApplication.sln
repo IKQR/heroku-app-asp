@@ -9,8 +9,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HerokuApplication.Web", "sr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deploy", "deploy", "{4C5E2553-3D64-4A92-9DAC-C15934CDC7F4}"
 	ProjectSection(SolutionItems) = preProject
+		.dockerignore = .dockerignore
+		.gitignore = .gitignore
 		Dockerfile.txt = Dockerfile.txt
+		heroku.yml = heroku.yml
 		.github\workflows\main.yml = .github\workflows\main.yml
+		README.md = README.md
 	EndProjectSection
 EndProject
 Global
