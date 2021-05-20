@@ -20,4 +20,4 @@ WORKDIR /app/
 
 COPY --from=build-env /out .
 
-CMD exec ./HerokuApplication.Web --urls http://+:$PORT
+CMD ASPNETCORE_URLS=http://*:$PORT dotnet HerokuApplication.Web.dll
