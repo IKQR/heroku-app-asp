@@ -1,16 +1,16 @@
-﻿using System;
+﻿using HerokuApplication.Dal;
+using HerokuApplication.Dal.Entity;
+using HerokuApplication.Web.Attributes;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using HerokuApplication.Dal;
-using HerokuApplication.Dal.Entity;
 
 namespace HerokuApplication.Web.Controllers.Api
 {
     [Route("api/NeuralLearnMasks")]
+    [SecretKeyAuth]
     [ApiController]
     public class NeuralLearnMasksController : ControllerBase
     {
@@ -23,10 +23,16 @@ namespace HerokuApplication.Web.Controllers.Api
 
         // GET: api/NeuralLearnMasks
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<NeuralLearnMask>>> GetNeuralLearnMasks()
+        [Route("{percentage}")]
+        public async Task<IEnumerable<NeuralLearnMask>> GetNeuralLearnMasks([FromRoute]double percentage = 0.2)
         {
-            return await _context.NeuralLearnMasks.OrderBy(x => x.BadAccuracyPercentage).ThenBy(x => x.GoodAccuracyPercentage).Where(x=> x.Koef >= 0.2).Take(5).ToListAsync();
+            return await _context.NeuralLearnMasks.OrderBy(x => x.BadAccuracyPercentage)
+                .ThenBy(x => x.GoodAccuracyPercentage)
+                .Where(x => x.BadAccuracyPercentage >= percentage && x.GoodAccuracyPercentage >= percentage)
+                .ToListAsync();
         }
+
+
 
         //// GET: api/NeuralLearnMasks/5
         //[HttpGet("{id}")]
