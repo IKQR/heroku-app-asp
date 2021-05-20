@@ -24,7 +24,7 @@ namespace HerokuApplication.Web.Controllers
             IConfiguration configuration)
         {
             _logger = logger;
-            _summaries.Add(configuration.GetSection("ConnectionStrings").Value);
+            _summaries.Add(configuration.GetConnectionString("Default"));
         }
 
         [HttpGet]
