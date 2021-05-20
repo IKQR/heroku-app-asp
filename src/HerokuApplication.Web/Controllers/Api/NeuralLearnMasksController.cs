@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HerokuApplication.Web.Model;
 
 namespace HerokuApplication.Web.Controllers.Api
 {
@@ -24,11 +25,19 @@ namespace HerokuApplication.Web.Controllers.Api
         // GET: api/NeuralLearnMasks
         [HttpGet]
         [Route("{percentage}")]
-        public async Task<IEnumerable<NeuralLearnMask>> GetNeuralLearnMasks([FromRoute]double percentage = 0.2)
+        public async Task<IEnumerable<NeuralLearnMaskGetDto>> GetNeuralLearnMasks([FromRoute]double percentage = 0.2)
         {
-            return await _context.NeuralLearnMasks.OrderBy(x => x.BadAccuracyPercentage)
+            return await _context.NeuralLearnMasks
+                .OrderBy(x => x.BadAccuracyPercentage)
                 .ThenBy(x => x.GoodAccuracyPercentage)
                 .Where(x => x.BadAccuracyPercentage >= percentage && x.GoodAccuracyPercentage >= percentage)
+                .Select(x => new NeuralLearnMaskGetDto
+                {
+                    Id = x.Id,
+                    Symbol = x.Symbol,
+                    BadAccuracyPercentage = x.BadAccuracyPercentage,
+                    GoodAccuracyPercentage = x.GoodAccuracyPercentage,
+                })
                 .ToListAsync();
         }
 
