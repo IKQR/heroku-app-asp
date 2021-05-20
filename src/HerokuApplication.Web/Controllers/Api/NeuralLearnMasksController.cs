@@ -28,8 +28,8 @@ namespace HerokuApplication.Web.Controllers.Api
         public async Task<IEnumerable<NeuralLearnMaskGetDto>> GetNeuralLearnMasks([FromRoute]double percentage = 0.2)
         {
             return await _context.NeuralLearnMasks
-                .OrderBy(x => x.BadAccuracyPercentage)
-                .ThenBy(x => x.GoodAccuracyPercentage)
+                .OrderByDescending(x => x.BadAccuracyPercentage)
+                .ThenByDescending(x => x.GoodAccuracyPercentage)
                 .Where(x => x.BadAccuracyPercentage >= percentage && x.GoodAccuracyPercentage >= percentage)
                 .Select(x => new NeuralLearnMaskGetDto
                 {
