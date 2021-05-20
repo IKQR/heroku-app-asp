@@ -18,4 +18,4 @@ WORKDIR /app/
 
 COPY --from=build-env /out .
 
-CMD exec ./Cotton.BackendDataReceiver.Web --urls http://+:$PORT
+CMD exec ./HerokuApplication.Web --urls http://+:$PORT
