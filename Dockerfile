@@ -1,3 +1,5 @@
+ARG ConnectionStrings__Default
+
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build-env
 
 WORKDIR /app/
@@ -17,5 +19,7 @@ FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
 WORKDIR /app/
 
 COPY --from=build-env /out .
+
+ENV ConnectionStrings__Default=ConnectionStrings__Default
 
 CMD exec ./HerokuApplication.Web --urls http://+:$PORT

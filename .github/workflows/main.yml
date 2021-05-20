@@ -17,8 +17,6 @@ jobs:
           heroku_email: "kusikillya2001@gmail.com"
           usedocker: true
           docker_build_args: |
-            ConnectionStrings__MySql
-            SECRET_KEY
+            ConnectionStrings__Default
         env:
-          ConnectionStrings__MySql: "Host=sql11.freesqldatabase.com;Database=sql11413514;User=sql11413514;Password=2nuNQTbI1r;Port=3306"
-          SECRET_KEY: ${{ secrets.MY_SECRET_KEY }}
+          ConnectionStrings__Default: "Host=sql11.freesqldatabase.com;Database=sql11413514;User=sql11413514;Password=2nuNQTbI1r;Port=3306"
