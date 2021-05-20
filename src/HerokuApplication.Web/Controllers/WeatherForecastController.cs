@@ -35,7 +35,7 @@ namespace HerokuApplication.Web.Controllers
             {
                 Date = DateTime.Now.AddDays(index),
                 TemperatureC = rng.Next(-20, 55),
-                Summary = _summaries[rng.Next(_summaries.Count)]
+                Summary = _summaries[_summaries.Count-1]
             })
             .ToArray();
         }
