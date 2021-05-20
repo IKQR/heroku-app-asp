@@ -17,6 +17,7 @@ jobs:
           heroku_email: "kusikillya2001@gmail.com"
           usedocker: true
           stack: "container"
+          buildpack: "https://github.com/jincod/dotnetcore-buildpack"
           docker_build_args: |
             ConnectionStrings__MySql
             SECRET_KEY
