@@ -1,22 +1,16 @@
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build-env
 WORKDIR /app
 
-# Copy csproj and restore as distinct layers
-COPY *.csproj ./
-RUN dotnet restore
+COPY /*.csproj ./
+RUN cd src; for file in $(ls *.csproj); do mkdir -p ${file%.*}/ && mv $file ${file%.*}/; done; cd ..
+RUN dotnet restore  
 
-# Copy everything else and build
-COPY . .
+COPY ./src /app/src
+WORKDIR /app/src/HerokuApplication.Web
 RUN dotnet publish -c Release -o out
 
-# Build runtime image
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
 WORKDIR /app
 COPY --from=build-env /app/out .
 
-# Run the app on container startup
-# Use your project name for the secclearond parameter
-# e.g. MyProject.dll
-# ENTRYPOINT [ "dotnet", "HerokuApp.dll" ]
-# Use the following instead for Heroku
 CMD ASPNETCORE_URLS=http://*:$PORT dotnet HerokuApplication.Web.dll
