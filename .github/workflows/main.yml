@@ -16,6 +16,7 @@ jobs:
           heroku_app_name: "ikqr-asp-application" #Must be unique in Heroku
           heroku_email: "kusikillya2001@gmail.com"
           usedocker: true
+          stack: "container"
           docker_build_args: |
             ConnectionStrings__MySql
             SECRET_KEY
