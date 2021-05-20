@@ -10,7 +10,7 @@ using HerokuApplication.Dal.Entity;
 
 namespace HerokuApplication.Web.Controllers.Api
 {
-    [Route("api/[controller]")]
+    [Route("api/NeuralLearnMasks")]
     [ApiController]
     public class NeuralLearnMasksController : ControllerBase
     {
@@ -25,7 +25,7 @@ namespace HerokuApplication.Web.Controllers.Api
         [HttpGet]
         public async Task<ActionResult<IEnumerable<NeuralLearnMask>>> GetNeuralLearnMasks()
         {
-            return await _context.NeuralLearnMasks.Skip(0).Take(2).ToListAsync();
+            return await _context.NeuralLearnMasks.OrderBy(x => x.BadAccuracyPercentage).ThenBy(x => x.GoodAccuracyPercentage).Where(x=> x.Koef >= 0.2).Take(5).ToListAsync();
         }
 
         //// GET: api/NeuralLearnMasks/5

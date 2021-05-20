@@ -19,10 +19,10 @@ namespace HerokuApplication.Dal.Entity
         [Column("learn_bad_set_q")]
         public string LearnBadSetQ { get; set; }
         [Column("kooef")]
-        public string Koef { get; set; }
+        public double Koef { get; set; }
         [Column("good_accuracy_procent")]
-        public string GoodAccuracyPercentage { get; set; }
+        public double GoodAccuracyPercentage { get; set; }
         [Column("bad_accuracy_procent")]
-        public string BadAccuracyPercentage { get; set; }
+        public double BadAccuracyPercentage { get; set; }
     }
 }

@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace HerokuApplication.Web.Attributes
 {
@@ -17,36 +15,44 @@ namespace HerokuApplication.Web.Attributes
         private const string ApiKeyName = "secret-key";
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
-            if (context.ActionDescriptor.EndpointMetadata.OfType<AllowAnonymousAttribute>().Any())
+            try
             {
+                if (context.ActionDescriptor.EndpointMetadata.OfType<AllowAnonymousAttribute>().Any())
+                {
+                    await next();
+                }
+
+                if (!context.HttpContext.Request.Headers.TryGetValue(ApiKeyName, out var extractedApiKey))
+                {
+                    context.Result = new ContentResult()
+                    {
+                        StatusCode = 401,
+                        Content = "Api Key was not provided"
+                    };
+                    return;
+                }
+
+                var appSettings = context.HttpContext.RequestServices.GetRequiredService<IConfiguration>();
+
+                var apiKey = appSettings.GetValue<string>(ApiKeyName);
+
+                if (!apiKey.Equals(extractedApiKey))
+                {
+                    context.Result = new ContentResult()
+                    {
+                        StatusCode = 401,
+                        Content = "Api Key is not valid"
+                    };
+                    return;
+                }
+
                 await next();
             }
-
-            if (!context.HttpContext.Request.Headers.TryGetValue(ApiKeyName, out var extractedApiKey))
+            catch (Exception ex)
             {
-                context.Result = new ContentResult()
-                {
-                    StatusCode = 401,
-                    Content = "Api Key was not provided"
-                };
-                return;
+                Console.WriteLine($"Error occurred while authentication : '{ex.Message}'");
+                await next();
             }
-
-            var appSettings = context.HttpContext.RequestServices.GetRequiredService<IConfiguration>();
-
-            var apiKey = appSettings.GetValue<string>(ApiKeyName);
-
-            if (!apiKey.Equals(extractedApiKey))
-            {
-                context.Result = new ContentResult()
-                {
-                    StatusCode = 401,
-                    Content = "Api Key is not valid"
-                };
-                return;
-            }
-
-            await next();
         }
     }
 }
