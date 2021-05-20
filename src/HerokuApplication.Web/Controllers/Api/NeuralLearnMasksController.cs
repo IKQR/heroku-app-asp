@@ -43,19 +43,19 @@ namespace HerokuApplication.Web.Controllers.Api
 
 
 
-        //// GET: api/NeuralLearnMasks/5
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<NeuralLearnMask>> GetNeuralLearnMask(int id)
-        //{
-        //    var neuralLearnMask = await _context.NeuralLearnMasks.FindAsync(id);
+        // GET: api/NeuralLearnMasks/5
+        [HttpGet("item/{id}")]
+        public async Task<ActionResult<NeuralLearnMask>> GetNeuralLearnMask(int id)
+        {
+            var neuralLearnMask = await _context.NeuralLearnMasks.FirstOrDefaultAsync(x => x.Id == id);
 
-        //    if (neuralLearnMask == null)
-        //    {
-        //        return NotFound();
-        //    }
+            if (neuralLearnMask == null)
+            {
+                return NotFound();
+            }
 
-        //    return neuralLearnMask;
-        //}
+            return neuralLearnMask;
+        }
 
         //// PUT: api/NeuralLearnMasks/5
         //// To protect from overposting attacks, enable the specific properties you want to bind to, for
@@ -101,21 +101,21 @@ namespace HerokuApplication.Web.Controllers.Api
         //    return CreatedAtAction("GetNeuralLearnMask", new { id = neuralLearnMask.Id }, neuralLearnMask);
         //}
 
-        //// DELETE: api/NeuralLearnMasks/5
-        //[HttpDelete("{id}")]
-        //public async Task<ActionResult<NeuralLearnMask>> DeleteNeuralLearnMask(int id)
-        //{
-        //    var neuralLearnMask = await _context.NeuralLearnMasks.FindAsync(id);
-        //    if (neuralLearnMask == null)
-        //    {
-        //        return NotFound();
-        //    }
+        // DELETE: api/NeuralLearnMasks/5
+        [HttpDelete("item/{id}")]
+        public async Task<ActionResult<NeuralLearnMask>> DeleteNeuralLearnMask(int id)
+        {
+            var neuralLearnMask = await _context.NeuralLearnMasks.FirstOrDefaultAsync(x => x.Id == id);
+            if (neuralLearnMask == null)
+            {
+                return NotFound();
+            }
 
-        //    _context.NeuralLearnMasks.Remove(neuralLearnMask);
-        //    await _context.SaveChangesAsync();
+            _context.NeuralLearnMasks.Remove(neuralLearnMask);
+            await _context.SaveChangesAsync();
 
-        //    return neuralLearnMask;
-        //}
+            return neuralLearnMask;
+        }
 
         //private bool NeuralLearnMaskExists(int id)
         //{
