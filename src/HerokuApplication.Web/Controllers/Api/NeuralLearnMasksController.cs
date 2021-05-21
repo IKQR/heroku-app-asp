@@ -1,4 +1,5 @@
-﻿using HerokuApplication.Dal;
+﻿using System;
+using HerokuApplication.Dal;
 using HerokuApplication.Dal.Entity;
 using HerokuApplication.Web.Attributes;
 using Microsoft.AspNetCore.Mvc;
@@ -6,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HerokuApplication.Web.Extension;
 using HerokuApplication.Web.Model;
 
 namespace HerokuApplication.Web.Controllers.Api
@@ -40,9 +42,6 @@ namespace HerokuApplication.Web.Controllers.Api
                 })
                 .ToListAsync();
         }
-
-
-
         // GET: api/NeuralLearnMasks/5
         [HttpGet("item/{id}")]
         public async Task<ActionResult<NeuralLearnMask>> GetNeuralLearnMask(int id)
@@ -55,6 +54,18 @@ namespace HerokuApplication.Web.Controllers.Api
             }
 
             return neuralLearnMask;
+        }
+        [HttpGet("item/format/{id}")]
+        public async Task<ActionResult<string>> GetNeuralLearnMaskCode(int id)
+        {
+            var code = (await _context.NeuralLearnMasks.FirstOrDefaultAsync(x => x.Id == id))?.Settings;
+
+            if (String.IsNullOrEmpty(code))
+            {
+                return NotFound();
+            }
+
+            return code.ParseCodeSpecSymbol();
         }
 
         //// PUT: api/NeuralLearnMasks/5
