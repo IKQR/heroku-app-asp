@@ -15,8 +15,8 @@ namespace HerokuApplication.Web.Attributes
     {
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
-            IConfiguration appSettings = context.HttpContext.RequestServices.GetRequiredService<IConfiguration>();
-            AuthConfig config = appSettings.GetValue<AuthConfig>(nameof(AuthConfig));
+            AuthConfig config = new AuthConfig();
+            context.HttpContext.RequestServices.GetRequiredService<IConfiguration>().Bind(nameof(AuthConfig), config);
 
             if (context.ActionDescriptor.EndpointMetadata.OfType<AllowAnonymousAttribute>().Any())
             {
